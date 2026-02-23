@@ -1,0 +1,29 @@
+{
+  "manifest_version": 3,
+  "name": "YouTube Transcript Copier",
+  "version": "1.0.0",
+  "description": "Copies the plain-text transcript of any YouTube video to your clipboard with one click.",
+  "icons": {
+    "48": "icon48.png",
+    "128": "icon128.png"
+  },
+  "permissions": [],
+  "host_permissions": [
+    "*://*.youtube.com/*",
+    "https://yt-transcript-api.onrender.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://www.youtube.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "css": [
+        "styles.css"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

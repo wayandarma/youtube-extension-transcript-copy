@@ -1,0 +1,134 @@
+/* ============================================================
+   YouTube Transcript Copier — Scoped Styles
+   All selectors prefixed with .yt-transcript-ext to avoid
+   collisions with YouTube's own CSS.
+   ============================================================ */
+
+/* ----- Copy Transcript Button ----- */
+
+.yt-transcript-ext-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 0 16px;
+  height: 36px;
+  border-radius: 18px;
+  border: 1px solid var(--yt-spec-10-percent-layer, rgba(0, 0, 0, 0.1));
+  background: transparent;
+  color: var(--yt-spec-text-primary, #0f0f0f);
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 36px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  margin-left: 8px;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+}
+
+.yt-transcript-ext-btn:hover {
+  background: var(--yt-spec-badge-chip-background, rgba(0, 0, 0, 0.05));
+}
+
+.yt-transcript-ext-btn:active {
+  background: var(--yt-spec-badge-chip-background, rgba(0, 0, 0, 0.1));
+}
+
+.yt-transcript-ext-btn svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* Spinning state while fetching */
+.yt-transcript-ext-btn--loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.yt-transcript-ext-btn--loading svg {
+  animation: yt-transcript-ext-spin 0.8s linear infinite;
+}
+
+@keyframes yt-transcript-ext-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ----- Dark-mode overrides ----- */
+html[dark] .yt-transcript-ext-btn {
+  border-color: var(--yt-spec-10-percent-layer, rgba(255, 255, 255, 0.2));
+  color: var(--yt-spec-text-primary, #f1f1f1);
+}
+
+html[dark] .yt-transcript-ext-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+html[dark] .yt-transcript-ext-btn:active {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+/* ----- Toast Notification ----- */
+
+.yt-transcript-ext-toast {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  background: rgba(20, 20, 20, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  color: #fff;
+  font-family: "Roboto", "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  animation: yt-transcript-ext-toast-in 0.3s ease forwards;
+}
+
+.yt-transcript-ext-toast--out {
+  animation: yt-transcript-ext-toast-out 0.35s ease forwards;
+}
+
+.yt-transcript-ext-toast--error {
+  background: rgba(180, 30, 30, 0.88);
+}
+
+.yt-transcript-ext-toast svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+@keyframes yt-transcript-ext-toast-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes yt-transcript-ext-toast-out {
+  from {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-12px);
+  }
+}
